@@ -108,7 +108,7 @@ const ListTaskComponent = () => {
         type="button"
         className="btn btn-primary"
         style={{ marginBottom: "10px" }}
-        onClick={() => addNewTask()}
+        onClick={addNewTask}
       >
         Add Task
       </button>
