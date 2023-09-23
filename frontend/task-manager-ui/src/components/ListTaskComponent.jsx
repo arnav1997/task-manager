@@ -59,9 +59,10 @@ const ListTaskComponent = () => {
   };
 
   const navigator = useNavigate();
-  function addNewTask() {
+
+  const addNewTask = () => {
     navigator("/add-task");
-  }
+  };
 
   const updateTask = (id) => {
     navigator(`/update-task/${id}`);
@@ -107,7 +108,7 @@ const ListTaskComponent = () => {
         type="button"
         className="btn btn-primary"
         style={{ marginBottom: "10px" }}
-        onClick={addNewTask}
+        onClick={() => addNewTask()}
       >
         Add Task
       </button>
@@ -134,7 +135,7 @@ const ListTaskComponent = () => {
                     id={`success-outlined-${task.id}`}
                     value="true"
                     checked={task.completed}
-                    onChange={handleComplete(task.id)}
+                    onChange={() => handleComplete(task.id)}
                     autoComplete="off"
                   />
                   <label
@@ -151,7 +152,7 @@ const ListTaskComponent = () => {
                     id={`danger-outlined-${task.id}`}
                     value="false"
                     checked={!task.completed}
-                    onChange={handleIncomplete(task.id)}
+                    onChange={() => handleIncomplete(task.id)}
                     autoComplete="off"
                   />
                   <label
@@ -165,13 +166,13 @@ const ListTaskComponent = () => {
               <td>
                 <button
                   className="btn btn-info me-3"
-                  onClick={updateTask(task.id)}
+                  onClick={() => updateTask(task.id)}
                 >
                   Update
                 </button>
                 <button
                   className="btn btn-danger"
-                  onClick={deleteTask(task.id)}
+                  onClick={() => deleteTask(task.id)}
                 >
                   Delete
                 </button>
