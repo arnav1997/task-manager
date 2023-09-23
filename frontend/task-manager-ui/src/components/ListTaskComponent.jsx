@@ -134,7 +134,7 @@ const ListTaskComponent = () => {
                     id={`success-outlined-${task.id}`}
                     value="true"
                     checked={task.completed}
-                    onChange={() => handleComplete(task.id)}
+                    onChange={handleComplete(task.id)}
                     autoComplete="off"
                   />
                   <label
@@ -151,7 +151,7 @@ const ListTaskComponent = () => {
                     id={`danger-outlined-${task.id}`}
                     value="false"
                     checked={!task.completed}
-                    onChange={() => handleIncomplete(task.id)}
+                    onChange={handleIncomplete(task.id)}
                     autoComplete="off"
                   />
                   <label
