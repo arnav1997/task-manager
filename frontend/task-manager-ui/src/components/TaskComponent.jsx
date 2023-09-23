@@ -14,8 +14,6 @@ const TaskComponent = () => {
   const [errors, setErrors] = useState({
     title: "",
     description: "",
-    // email: "",
-    // deptId: "",
   });
   const { id } = useParams();
 
@@ -50,20 +48,6 @@ const TaskComponent = () => {
       valid = false;
       errorsCopy.description = "Description can't be blank!";
     }
-
-    // if (email.trim()) {
-    //   errorsCopy.email = "";
-    // } else {
-    //   valid = false;
-    //   errorsCopy.email = "Email ID can't be blank!";
-    // }
-
-    // if (deptId) {
-    //   errorsCopy.deptId = "";
-    // } else {
-    //   valid = false;
-    //   errorsCopy.deptId = "Department can't be blank!";
-    // }
 
     setErrors(errorsCopy);
     return valid;
