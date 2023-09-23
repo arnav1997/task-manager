@@ -9,26 +9,6 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const ListTaskComponent = () => {
-  // Dummy data
-  // const taskData = [{
-  //     "id" : 1,
-  //     "firstName" : "Arnav",
-  //     "lastName" : "Mahapatra",
-  //     "email" : "arnav.mahapatra31@gmail.com"
-  // },
-  // {
-  //     "id" : 2,
-  //     "firstName" : "Jenny",
-  //     "lastName" : "Mahapatra",
-  //     "email" : "jenny.mahapatra31@gmail.com"
-  // },
-  // {
-  //     "id" : 3,
-  //     "firstName" : "Moon",
-  //     "lastName" : "Mahapatra",
-  //     "email" : "moon.mahapatra31@gmail.com"
-  // }];
-
   // Method 1 using fetch()
   // const [tasks, setTasks] = useState([]);
 
