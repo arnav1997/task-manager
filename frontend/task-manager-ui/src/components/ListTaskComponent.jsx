@@ -165,13 +165,13 @@ const ListTaskComponent = () => {
               <td>
                 <button
                   className="btn btn-info me-3"
-                  onClick={() => updateTask(task.id)}
+                  onClick={updateTask(task.id)}
                 >
                   Update
                 </button>
                 <button
                   className="btn btn-danger"
-                  onClick={() => deleteTask(task.id)}
+                  onClick={deleteTask(task.id)}
                 >
                   Delete
                 </button>
