@@ -59,7 +59,6 @@ public class TaskServiceImpl implements TaskService {
         Task updatedTask = taskRepository.save(retrievedTask);
         return modelMapper.map(updatedTask, TaskDTO.class);
     }
-
     @Override
     public TaskDTO markIncomplete(Long taskId) {
         Task retrievedTask = taskRepository.findById(taskId)
