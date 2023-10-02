@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
     private AuthService authService;
-    @PostMapping
+    @PostMapping("/register")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> createTask (@RequestBody RegisterDTO registerDTO) {
         String response = authService.register(registerDTO);
