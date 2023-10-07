@@ -1,5 +1,6 @@
 package com.infotrode.taskmanager.service;
 
+import com.infotrode.taskmanager.dto.LoginDTO;
 import com.infotrode.taskmanager.dto.RegisterDTO;
 import com.infotrode.taskmanager.entity.Role;
 import com.infotrode.taskmanager.entity.User;
@@ -8,6 +9,10 @@ import com.infotrode.taskmanager.repository.RoleRepository;
 import com.infotrode.taskmanager.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +25,7 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private AuthenticationManager authenticationManager;
     @Override
     public String register(RegisterDTO registerDTO) {
         if (userRepository.existsByUsername(registerDTO.getUsername())) {
@@ -39,5 +45,14 @@ public class AuthServiceImpl implements AuthService {
         user.setRoles(roles);
         userRepository.save(user);
         return "User added successfully!";
+    }
+    @Override
+    public String login(LoginDTO loginDTO) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDTO.getUsernameOrEmail(),
+                loginDTO.getPassword()
+        ));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return "Login successful!";
     }
 }

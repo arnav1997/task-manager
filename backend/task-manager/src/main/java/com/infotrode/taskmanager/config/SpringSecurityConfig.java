@@ -3,6 +3,7 @@ package com.infotrode.taskmanager.config;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -33,6 +34,7 @@ public class SpringSecurityConfig {
 //                    auth.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER", "ADMIN");
 //                    auth.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers("/api/auth/**").permitAll();
+                    auth.requestMatchers(HttpMethod.OPTIONS, "**").permitAll();
                     auth.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());
         return http.build();
