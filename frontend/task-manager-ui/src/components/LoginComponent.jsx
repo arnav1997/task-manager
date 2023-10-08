@@ -13,7 +13,8 @@ const LoginComponent = () => {
     await login(userDetails)
       .then((response) => {
         console.log(response);
-        const token = "Basic " + window.btoa(usernameOrEmail + ":" + password);
+        // const token = "Basic " + window.btoa(usernameOrEmail + ":" + password);
+        const token = "Bearer " + response.data.accessToken;
         storeToken(token);
         saveLoggedInUser(usernameOrEmail);
         navigator("/tasks");

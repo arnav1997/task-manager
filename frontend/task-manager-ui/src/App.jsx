@@ -9,8 +9,9 @@ import LoginComponent from "./components/LoginComponent";
 import { isUserLoggedIn } from "./services/AuthService";
 
 function App() {
-  const AuthenticatedRoute = (children) => {
+  const AuthenticatedRoute = ({ children }) => {
     const isAuth = isUserLoggedIn();
+    console.log(isAuth);
     if (isAuth) {
       return children;
     }

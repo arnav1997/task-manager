@@ -1,5 +1,7 @@
 package com.infotrode.taskmanager.config;
 
+import com.infotrode.taskmanager.security.JwtAuthenticationEntryPoint;
+import com.infotrode.taskmanager.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +16,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
 @AllArgsConstructor
 public class SpringSecurityConfig {
-    private UserDetailsService userDetailsService;
+//    private UserDetailsService userDetailsService;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -37,6 +42,9 @@ public class SpringSecurityConfig {
                     auth.requestMatchers(HttpMethod.OPTIONS, "**").permitAll();
                     auth.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint));
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 //    @Bean

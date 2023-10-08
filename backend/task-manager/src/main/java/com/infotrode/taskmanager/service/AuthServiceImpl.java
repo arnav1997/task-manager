@@ -7,6 +7,7 @@ import com.infotrode.taskmanager.entity.User;
 import com.infotrode.taskmanager.exception.AuthException;
 import com.infotrode.taskmanager.repository.RoleRepository;
 import com.infotrode.taskmanager.repository.UserRepository;
+import com.infotrode.taskmanager.security.JwtTokenProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +27,7 @@ public class AuthServiceImpl implements AuthService {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
+    private JwtTokenProvider jwtTokenProvider;
     @Override
     public String register(RegisterDTO registerDTO) {
         if (userRepository.existsByUsername(registerDTO.getUsername())) {
@@ -53,6 +55,6 @@ public class AuthServiceImpl implements AuthService {
                 loginDTO.getPassword()
         ));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "Login successful!";
+        return jwtTokenProvider.generateToken(authentication);
     }
 }

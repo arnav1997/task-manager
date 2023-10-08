@@ -1,5 +1,6 @@
 package com.infotrode.taskmanager.controller;
 
+import com.infotrode.taskmanager.dto.JwtAuthResponseDTO;
 import com.infotrode.taskmanager.dto.LoginDTO;
 import com.infotrode.taskmanager.dto.RegisterDTO;
 import com.infotrode.taskmanager.service.AuthService;
@@ -20,8 +21,10 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<String> login (@RequestBody LoginDTO loginDTO) {
-        String response = authService.login(loginDTO);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<JwtAuthResponseDTO> login (@RequestBody LoginDTO loginDTO) {
+        String token = authService.login(loginDTO);
+        JwtAuthResponseDTO jwtAuthResponseDTO = new JwtAuthResponseDTO();
+        jwtAuthResponseDTO.setAccessToken(token);
+        return new ResponseEntity<>(jwtAuthResponseDTO, HttpStatus.OK);
     }
 }
